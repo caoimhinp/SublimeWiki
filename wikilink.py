@@ -41,7 +41,9 @@ class WikiLinkCommand(sublime_plugin.TextCommand):
                 #Create a new file and slap in the default text.
                 new_view = window.new_file()
                 default_text = "{0}\nWrite about {0} here.".format(word)
-                new_view.run_command('append', {'characters': default_text})
+                # run_command('append'...) didn't work. Couldn't find it in the API.
+                # Changed to 'insert' instead.
+                new_view.run_command('insert', {'characters': default_text})
                 new_view.set_name("%s.wiki" % word)
                 new_view.set_syntax_file("Packages/Wiki/Wiki.tmLanguage")
         else:
